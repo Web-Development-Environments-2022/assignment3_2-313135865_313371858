@@ -48,9 +48,20 @@ return response
 }
 
 
+async function searchQuery(query){
+    const response = await axios.get(`${api_domain}/complexSearch`,
+    { params: {
+        query:query,
+        apiKey: process.env.spooncular_apiKey
+    }
+});
+return response
+}
+
 
 exports.getRecipeDetails = getRecipeDetails;
 exports.getRandomRecipes = getRandomRecipes;
+exports.searchQuery = searchQuery;
 
 
 

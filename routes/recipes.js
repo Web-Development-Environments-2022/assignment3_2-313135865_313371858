@@ -32,4 +32,17 @@ router.get("/random", async (req, res, next) => {
   }
 });
 
+
+/**
+ * This path returns a full details of a recipe by its id
+ */
+ router.get("/search", async (req, res, next) => {
+  try {
+    const recipes = await recipes_utils.searchQuery(req.params.query);
+    res.send(recipes);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
