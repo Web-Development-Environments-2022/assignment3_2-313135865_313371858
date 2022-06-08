@@ -18,9 +18,17 @@ async function getRecipeInformation(recipe_id) {
     });
 }
 
+async function getRecipeInstructions(recipe_id) {
+    return await axios.get(`${api_domain}/${recipe_id}/analyzedInstructions`, {
+        params: {
+            apiKey: process.env.spooncular_apiKey
+        }
+    });
+}
 
 
-async function getRecipeDetails(recipe_id) {
+
+async function getRecipePreview(recipe_id) {
     let recipe_info = await getRecipeInformation(recipe_id);
     let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian, glutenFree } = recipe_info.data;
 
@@ -34,6 +42,35 @@ async function getRecipeDetails(recipe_id) {
         vegetarian: vegetarian,
         glutenFree: glutenFree,
         
+    }
+}
+
+async function getRecipesPreview(recipes_id) {
+    let results = []
+    for (let i = 0; i < recipes_id.length; i++) {
+        results.push(await getRecipePreview(recipes_id[i]))
+    }
+    return results
+}
+
+
+async function getRecipeFullDetails(recipe_id) {
+    let recipe_info = await getRecipeInformation(recipe_id);
+    let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian, glutenFree, extendedIngredients, servings} = recipe_info.data;
+    let recipe_Instructions = await getRecipeInstructions(recipe_id);
+    let {instructions} = recipe_Instructions.data
+    return {
+        id: id,
+        title: title,
+        readyInMinutes: readyInMinutes,
+        image: image,
+        popularity: aggregateLikes,
+        vegan: vegan,
+        vegetarian: vegetarian,
+        glutenFree: glutenFree,
+        extendedIngredients: extendedIngredients,
+        servings : servings,
+        instructions : instructions
     }
 }
 
@@ -60,9 +97,10 @@ return response
 }
 
 
-exports.getRecipeDetails = getRecipeDetails;
+exports.getRecipePreview = getRecipePreview;
 exports.getRandomRecipes = getRandomRecipes;
 exports.searchQuery = searchQuery;
-
+exports.getRecipeFullDetails = getRecipeFullDetails;
+exports.getRecipesPreview = getRecipesPreview;
 
 

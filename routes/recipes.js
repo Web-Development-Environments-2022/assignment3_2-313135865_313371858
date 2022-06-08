@@ -36,9 +36,21 @@ router.get("/random", async (req, res, next) => {
 /**
  * This path returns a full details of a recipe by its id
  */
-router.get("/:recipeId", async (req, res, next) => {
+router.get("/recipePreview", async (req, res, next) => {
   try {
-    const recipe = await recipes_utils.getRecipeDetails(req.params.recipeId);
+    const recipe = await recipes_utils.getRecipePreview(req.query.recipeId);
+    res.send(recipe);
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * This path returns a full details of a recipe by its id
+ */
+ router.get("/recipeFullDetails", async (req, res, next) => {
+  try {
+    const recipe = await recipes_utils.getRecipeFullDetails(req.query.recipeId);
     res.send(recipe);
   } catch (error) {
     next(error);
