@@ -48,9 +48,10 @@ return response
 }
 
 
-async function searchQuery(query){
+async function searchQuery(query,number){
     const response = await axios.get(`${api_domain}/complexSearch`,
     { params: {
+        number: number,
         query:query,
         apiKey: process.env.spooncular_apiKey
     }
