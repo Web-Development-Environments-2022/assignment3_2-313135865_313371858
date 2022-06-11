@@ -58,7 +58,7 @@ async function getRecipeFullDetails(recipe_id) {
     let recipe_info = await getRecipeInformation(recipe_id);
     let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian, glutenFree, extendedIngredients, servings} = recipe_info.data;
     let recipe_Instructions = await getRecipeInstructions(recipe_id);
-    let {instructions} = recipe_Instructions.data
+    let instructions = recipe_Instructions.data
     return {
         id: id,
         title: title,

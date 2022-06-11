@@ -69,11 +69,51 @@ router.get('/favorites', async (req,res,next) => {
   }
 });
 
+/**
+ * This path returns the user's family recipes that were saved by the logged-in user
+ */
 router.get('/familyRecipes', async (req,res,next) => {
   try{
     const user_id = req.session.user_id;
     const recipes_details = await user_utils.getfamilyRecipes(user_id);
     let recipes_id_array = [];
+    res.status(200).send(recipes_details);
+  } catch(error){
+    next(error); 
+  }
+});
+
+
+/**
+ * This path returns the user's personal recipe that were saved by the logged-in user
+ */
+ router.get('/personalRecipe', async (req,res,next) => {
+  try{
+    const user_id = req.session.user_id;
+    const recipes_details = await user_utils.getpersonalRecipes(user_id);
+    let recipes_id_array = [];
+    res.status(200).send(recipes_details);
+  } catch(error){
+    next(error); 
+  }
+});
+
+/**
+ * This path post new personal recipe that were saved by the logged-in user
+ */
+ router.post('/personalRecipe', async (req,res,next) => {
+  try{
+    const user_id = req.session.user_id;
+    const recipes_details = await user_utils.getfamilyRecipes(user_id);
+    let recipe_details = {
+      username: req.body.username,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      country: req.body.country,
+      password: req.body.password,
+      email: req.body.email,
+      profilePic: req.body.profilePic
+    }
     res.status(200).send(recipes_details);
   } catch(error){
     next(error); 
