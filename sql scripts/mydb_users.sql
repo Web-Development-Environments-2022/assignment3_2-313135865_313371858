@@ -40,7 +40,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (3,'Yonman3','$2b$10$HH4L6AOdU1KvBFrofC3zb.ojAvw.QXsqawsXUbw0vsnYBEBEqa2.O','Yoni','Pelah','Israel','yonman2@gmail.com');
+INSERT INTO `users` VALUES (1,'a','a','a','a','a','a'),(2,'b','b','b','b','b','b'),(3,'Yonman3','$2b$10$HH4L6AOdU1KvBFrofC3zb.ojAvw.QXsqawsXUbw0vsnYBEBEqa2.O','Yoni','Pelah','Israel','yonman2@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-11 12:47:03
+-- Dump completed on 2022-06-11 16:00:46
