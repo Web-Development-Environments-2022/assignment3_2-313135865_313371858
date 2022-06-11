@@ -20,6 +20,7 @@ router.get("/search", async (req, res, next) => {
     }
 
     const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number);
+    
     if (recipes.data.results.length == 0){
       res.send("No results!");
     }
