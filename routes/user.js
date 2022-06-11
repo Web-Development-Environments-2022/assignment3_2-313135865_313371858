@@ -69,6 +69,17 @@ router.get('/favorites', async (req,res,next) => {
   }
 });
 
+router.get('/familyRecipes', async (req,res,next) => {
+  try{
+    const user_id = req.session.user_id;
+    const recipes_details = await user_utils.getfamilyRecipes(user_id);
+    let recipes_id_array = [];
+    res.status(200).send(recipes_details);
+  } catch(error){
+    next(error); 
+  }
+});
+
 
 
 module.exports = router;

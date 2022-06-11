@@ -57,7 +57,7 @@ const recipes = require("./routes/recipes");
 const auth = require("./routes/auth");
 
 
-//#region cookie middleware
+// #region cookie middleware
 app.use(function (req, res, next) {
   if (req.session && req.session.user_id) {
     DButils.execQuery("SELECT user_id FROM users")
@@ -72,7 +72,7 @@ app.use(function (req, res, next) {
     next();
   }
 });
-//#endregion
+// #endregion
 
 // ----> For cheking that our server is alive
 app.get("/alive", (req, res) => res.send("I'm alive"));

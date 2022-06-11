@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
--- Host: localhost    Database: webdatabase
+-- Host: localhost    Database: mydb
 -- ------------------------------------------------------
 -- Server version	8.0.29
 

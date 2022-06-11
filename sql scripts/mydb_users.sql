@@ -40,7 +40,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'a','a','a','a','a','a'),(2,'b','b','b','b','b','b'),(3,'Yonman3','$2b$10$HH4L6AOdU1KvBFrofC3zb.ojAvw.QXsqawsXUbw0vsnYBEBEqa2.O','Yoni','Pelah','Israel','yonman2@gmail.com');
+INSERT INTO `users` VALUES (3,'Yonman3','$2b$10$HH4L6AOdU1KvBFrofC3zb.ojAvw.QXsqawsXUbw0vsnYBEBEqa2.O','Yoni','Pelah','Israel','yonman2@gmail.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
