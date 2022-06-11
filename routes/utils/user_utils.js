@@ -15,6 +15,11 @@ async function getLastSeenRecipes(user_id){
     return recipes_id;
 }
 
+async function addRecipeToSeenRecipes(user_id, recipe_id){
+    await DButils.execQuery(`insert into user_recipe_seen_date values ('${user_id}',${recipe_id})`);
+    
+}
+
 async function getfamilyRecipes(user_id){
     const recipes_details = await DButils.execQuery(`select recipe_owner, recipe_name ,dedicated_time, ingredients, instructions, image from family_recipes where user_id='${user_id}'`);
     return recipes_details;
@@ -56,3 +61,4 @@ exports.getpersonalRecipes = getpersonalRecipes;
 exports.addpersonalRecipes = addpersonalRecipes;
 exports.Is_user_seen_recipe = Is_user_seen_recipe;
 exports.Is_user_add_recipe_to_favorite = Is_user_add_recipe_to_favorite;
+exports.addRecipeToSeenRecipes = addRecipeToSeenRecipes;
