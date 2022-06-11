@@ -1,4 +1,5 @@
 var express = require("express");
+const req = require("express/lib/request");
 var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
 
@@ -18,8 +19,8 @@ router.get("/search", async (req, res, next) => {
     if (req.session && req.session.user_id) {
       req.session.last_search = req.query.searchQuery
     }
-
-    const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number);
+  
+    const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number,req.query.cuisine,req.query.diet,req.query.intolerances);
     
     if (recipes.data.results.length == 0){
       res.send("No results!");
@@ -90,6 +91,7 @@ router.get("/recipePreview", async (req, res, next) => {
 
 
 
-
-
 module.exports = router;
+
+
+

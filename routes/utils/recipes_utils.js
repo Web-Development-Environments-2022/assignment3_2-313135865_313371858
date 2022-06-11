@@ -85,11 +85,14 @@ return response
 }
 
 
-async function searchQuery(query,number){
+async function searchQuery(query,number,cuisine,diet,intolerances){
     const response = await axios.get(`${api_domain}/complexSearch`,
     { params: {
         number: number,
         query:query,
+        cuisine:cuisine,
+        diet:diet,
+        intolerances:intolerances,
         apiKey: process.env.spooncular_apiKey
     }
 });
