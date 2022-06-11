@@ -31,6 +31,22 @@ async function addpersonalRecipes(user_id,recipe_details){
     return recipes_details;
 }
 
+async function Is_user_seen_recipe(user_id, recipe_id){
+    const seen_amount = await DButils.execQuery(`select count(*) from user_recipe_seen_date where user_id='${user_id}' AND recipe_id='${recipe_id}'`);
+    if (seen_amount >= 1){
+        return true
+    } 
+    else {return false}
+}
+
+async function Is_user_add_recipe_to_favorite(user_id, recipe_id){
+    const fav_amount = await DButils.execQuery(`select count(*) from favorite_recipes where user_id='${user_id}' AND recipe_id='${recipe_id}'`);
+    if (fav_amount >= 1){
+        return true
+    } 
+    else {return false}
+}
+
 
 exports.markAsFavorite = markAsFavorite;
 exports.getFavoriteRecipes = getFavoriteRecipes;
@@ -38,3 +54,5 @@ exports.getLastSeenRecipes = getLastSeenRecipes;
 exports.getfamilyRecipes = getfamilyRecipes;
 exports.getpersonalRecipes = getpersonalRecipes;
 exports.addpersonalRecipes = addpersonalRecipes;
+exports.Is_user_seen_recipe = Is_user_seen_recipe;
+exports.Is_user_add_recipe_to_favorite = Is_user_add_recipe_to_favorite;
