@@ -20,13 +20,21 @@ async function getfamilyRecipes(user_id){
     return recipes_details;
 }
 
-async function getpersonalRecipes(user_id){
+async function getpersonalRecipes(user_id,recipe_details){
     const recipes_details = await DButils.execQuery(`select * from personal_recipes where user_id='${user_id}'`);
     return recipes_details;
 }
+
+async function addpersonalRecipes(user_id,recipe_details){
+    const recipes_details = await DButils.execQuery(`INSERT INTO personal_recipes  VALUES (NULL, '${user_id}', '${recipe_details.image}', '${recipe_details.title}', ${recipe_details.readyInMinutes}, ${recipe_details.popularity}, ${recipe_details.vegan}, ${recipe_details.vegetarian}, ${recipe_details.have_seen}, ${recipe_details.saved_to_favorite}, '${recipe_details.extendedIngredients}', '${recipe_details.instructions}', ${recipe_details.servings});`);
+
+    return recipes_details;
+}
+
 
 exports.markAsFavorite = markAsFavorite;
 exports.getFavoriteRecipes = getFavoriteRecipes;
 exports.getLastSeenRecipes = getLastSeenRecipes;
 exports.getfamilyRecipes = getfamilyRecipes;
 exports.getpersonalRecipes = getpersonalRecipes;
+exports.addpersonalRecipes = addpersonalRecipes;

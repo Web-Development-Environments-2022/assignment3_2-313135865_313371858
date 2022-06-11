@@ -99,25 +99,30 @@ router.get('/familyRecipes', async (req,res,next) => {
 });
 
 /**
- * This path post new personal recipe that were saved by the logged-in user
+ * This path to post new personal recipe that were saved by the logged-in user
  */
  router.post('/personalRecipe', async (req,res,next) => {
   try{
     const user_id = req.session.user_id;
-    const recipes_details = await user_utils.getfamilyRecipes(user_id);
     let recipe_details = {
-      username: req.body.username,
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      country: req.body.country,
-      password: req.body.password,
-      email: req.body.email,
-      profilePic: req.body.profilePic
+      image: req.body.image,
+      title: req.body.title,
+      readyInMinutes: req.body.readyInMinutes,
+      popularity: 0,
+      vegan: req.body.vegan,
+      vegetarian: req.body.vegetarian,
+      have_seen: 0,
+      saved_to_favorite: 0,
+      extendedIngredients: req.body.extendedIngredients,
+      instructions: req.body.instructions,
+      servings: req.body.servings
     }
+    const recipes_details = await user_utils.addpersonalRecipes(user_id, recipe_details);
     res.status(200).send(recipes_details);
   } catch(error){
     next(error); 
   }
+
 });
 
 

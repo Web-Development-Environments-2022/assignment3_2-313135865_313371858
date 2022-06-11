@@ -14,8 +14,33 @@ router.get("/search", async (req, res, next) => {
     if (number != 10 && number != 15){
       number = 5
     }
+
+    if (req.session && req.session.user_id) {
+      req.session.last_search = req.query.searchQuery
+    }
+
     const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number);
     res.send(recipes.data);
+  } catch (error) {
+    next(error);
+  }
+});
+
+/**
+ * This path the last searched query
+ */
+ router.get("/getLastSearch", async (req, res, next) => {
+  try {
+
+    if (req.session && req.session.user_id) {
+      result = req.session.last_search 
+    }
+
+    else {
+      result = ""
+    }
+
+    res.send(result);
   } catch (error) {
     next(error);
   }
