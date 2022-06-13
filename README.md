@@ -6,6 +6,6 @@
 - 313371858
 - 313135865
 
-## Additional files
+## Swagger documentation
 
-- Swagger html document.
+https://app.swaggerhub.com/apis-docs/JonathanP-Git/API/1.0.0
