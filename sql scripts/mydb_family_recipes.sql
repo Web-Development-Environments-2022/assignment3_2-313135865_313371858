@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `family_recipes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `family_recipes` (
+  `family_recipe_id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `recipe_owner` varchar(45) NOT NULL,
   `recipe_name` varchar(45) NOT NULL,
@@ -30,9 +31,10 @@ CREATE TABLE `family_recipes` (
   `ingredients` varchar(250) NOT NULL,
   `instructions` varchar(250) NOT NULL,
   `image` varchar(250) NOT NULL,
+  PRIMARY KEY (`family_recipe_id`),
   KEY `user_id_family_idx` (`user_id`),
   CONSTRAINT `family_user_id_recipes` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +43,7 @@ CREATE TABLE `family_recipes` (
 
 LOCK TABLES `family_recipes` WRITE;
 /*!40000 ALTER TABLE `family_recipes` DISABLE KEYS */;
-INSERT INTO `family_recipes` VALUES (3,'Yonman3','','Shavout','ingredients','instructions','image'),(3,'Yonman3','cheese cake','Shavout','cream cheese, sugar, vanilla extract, eggs','Process graham crackers; mix with sugar, salt, butter:\nPulse the graham crackers in a food processor or blender until finely ground. Put in a large bowl, and stir in the sugar and salt. Stir in the melted butter.','https://www.simplyrecipes.com/thmb/J8bCbcrKXGv8EjPDV9001Ct585Q=/720x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Perfect-Cheesecake-LEAD-12-b66d9b6cce9b444e8c7410b2161e36b8.jpg'),(1,'Yonman3','pie','Shavout','cream cheese, salt, eggs','Process graham crackers; mix with sugar, salt, butter:\nPulse the graham crackers in a food processor or blender until finely ground. Put in a large bowl, and stir in the sugar and salt. Stir in the melted butter.','https://www.simplyrecipes.com/thmb/J8bCbcrKXGv8EjPDV9001Ct585Q=/720x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Perfect-Cheesecake-LEAD-12-b66d9b6cce9b444e8c7410b2161e36b8.jpg');
+INSERT INTO `family_recipes` VALUES (1,3,'Yonman3','','Shavout','ingredients','instructions','image'),(2,3,'Yonman3','cheese cake','Shavout','cream cheese, sugar, vanilla extract, eggs','Process graham crackers; mix with sugar, salt, butter:\nPulse the graham crackers in a food processor or blender until finely ground. Put in a large bowl, and stir in the sugar and salt. Stir in the melted butter.','https://www.simplyrecipes.com/thmb/J8bCbcrKXGv8EjPDV9001Ct585Q=/720x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Perfect-Cheesecake-LEAD-12-b66d9b6cce9b444e8c7410b2161e36b8.jpg'),(3,1,'Yonman3','pie','Shavout','cream cheese, salt, eggs','Process graham crackers; mix with sugar, salt, butter:\nPulse the graham crackers in a food processor or blender until finely ground. Put in a large bowl, and stir in the sugar and salt. Stir in the melted butter.','https://www.simplyrecipes.com/thmb/J8bCbcrKXGv8EjPDV9001Ct585Q=/720x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/Simply-Recipes-Perfect-Cheesecake-LEAD-12-b66d9b6cce9b444e8c7410b2161e36b8.jpg');
 /*!40000 ALTER TABLE `family_recipes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-06-11 16:00:45
+-- Dump completed on 2022-06-23 16:26:35
