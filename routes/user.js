@@ -107,6 +107,7 @@ router.get('/familyRecipes', async (req,res,next) => {
  */
  router.post('/personalRecipe', async (req,res,next) => {
   try{
+
     const user_id = req.session.user_id;
     let recipe_details = {
       image: req.body.image,
@@ -121,8 +122,10 @@ router.get('/familyRecipes', async (req,res,next) => {
       instructions: req.body.instructions,
       servings: req.body.servings
     }
+
     const recipes_details = await user_utils.addpersonalRecipes(user_id, recipe_details);
     res.status(200).send(recipes_details);
+    
   } catch(error){
     next(error); 
   }
