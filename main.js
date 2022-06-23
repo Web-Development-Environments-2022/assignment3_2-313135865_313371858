@@ -1,3 +1,5 @@
+// spooncular_apiKey = a30a0b725e9c47399f44dd7c0143098f Jonathan
+// spooncular_apiKey = 60869148401f42cdad28947bafa53443 Daphne
 require("dotenv").config();
 //#region express configures
 var express = require("express");

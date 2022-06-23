@@ -37,7 +37,7 @@ async function getRecipePreview(recipe_id) {
         title: title,
         readyInMinutes: readyInMinutes,
         image: image,
-        popularity: aggregateLikes,
+        aggregateLikes: aggregateLikes,
         vegan: vegan,
         vegetarian: vegetarian,
         glutenFree: glutenFree,
@@ -45,12 +45,12 @@ async function getRecipePreview(recipe_id) {
     }
 }
 
-async function getRecipesPreview(recipes_id) {
-    let results = []
-    for (let i = 0; i < recipes_id.length; i++) {
-        results.push(await getRecipePreview(recipes_id[i]))
+async function getRecipesPreview(results) {
+    let response = []
+    for (let i = 0; i < Math.min(5,results.length); i++) {
+        response.push(await getRecipePreview(results[i].id))
     }
-    return results
+    return response
 }
 
 
@@ -58,19 +58,19 @@ async function getRecipeFullDetails(recipe_id) {
     let recipe_info = await getRecipeInformation(recipe_id);
     let { id, title, readyInMinutes, image, aggregateLikes, vegan, vegetarian, glutenFree, extendedIngredients, servings} = recipe_info.data;
     let recipe_Instructions = await getRecipeInstructions(recipe_id);
-    let instructions = recipe_Instructions.data
+    let analyzedInstructions = recipe_Instructions.data
     return {
         id: id,
         title: title,
         readyInMinutes: readyInMinutes,
         image: image,
-        popularity: aggregateLikes,
+        aggregateLikes: aggregateLikes,
         vegan: vegan,
         vegetarian: vegetarian,
         glutenFree: glutenFree,
         extendedIngredients: extendedIngredients,
         servings : servings,
-        instructions : instructions
+        analyzedInstructions : analyzedInstructions
     }
 }
 
@@ -86,7 +86,7 @@ return response
 
 
 async function searchQuery(query,number,cuisine,diet,intolerances){
-    const response = await axios.get(`${api_domain}/complexSearch`,
+    let response = await axios.get(`${api_domain}/complexSearch`,
     { params: {
         number: number,
         query:query,
@@ -96,6 +96,7 @@ async function searchQuery(query,number,cuisine,diet,intolerances){
         apiKey: process.env.spooncular_apiKey
     }
 });
+    response = getRecipesPreview(response.data.results)
 return response
 }
 

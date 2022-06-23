@@ -22,11 +22,13 @@ router.get("/search", async (req, res, next) => {
   
     const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number,req.query.cuisine,req.query.diet,req.query.intolerances);
     
-    if (recipes.data.results.length == 0){
+    if (recipes.length == 0){
       res.send("No results!");
     }
+
     else {
-      res.send(recipes.data);}
+      res.send(recipes);
+    }
 
   } catch (error) {
     next(error);
