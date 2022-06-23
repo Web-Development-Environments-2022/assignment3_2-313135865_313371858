@@ -1,5 +1,6 @@
 // spooncular_apiKey = a30a0b725e9c47399f44dd7c0143098f Jonathan
 // spooncular_apiKey = 60869148401f42cdad28947bafa53443 Daphne
+//spooncular_apiKey = 02649c16c6854707a07ee4dc7cebf679 Jonathan BGU MAIL
 require("dotenv").config();
 //#region express configures
 var express = require("express");
