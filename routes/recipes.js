@@ -2,6 +2,8 @@ var express = require("express");
 const req = require("express/lib/request");
 var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
+const user_utils = require("./utils/user_utils");
+
 
 router.get("/", (req, res) => {
   });
@@ -85,6 +87,9 @@ router.get("/recipePreview", async (req, res, next) => {
  router.get("/recipeFullDetails", async (req, res, next) => {
   try {
     const recipe = await recipes_utils.getRecipeFullDetails(req.query.recipeId);
+    if (req.session && req.session.user_id) {
+      user_utils.addRecipeToSeenRecipes(req.session.user_id, req.query.recipeId)
+    }
     res.send(recipe);
   } catch (error) {
     next(error);

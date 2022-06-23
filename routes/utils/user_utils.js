@@ -16,7 +16,7 @@ async function getLastSeenRecipes(user_id){
 }
 
 async function addRecipeToSeenRecipes(user_id, recipe_id){
-    await DButils.execQuery(`insert into user_recipe_seen_date values ('${user_id}',${recipe_id})`, NOW());
+    await DButils.execQuery(`insert into user_recipe_seen_date values (${user_id},${recipe_id}, NOW())`);
     
 }
 
