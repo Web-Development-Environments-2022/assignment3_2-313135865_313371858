@@ -80,7 +80,7 @@ router.get('/familyRecipes', async (req,res,next) => {
     const user_id = req.session.user_id;
     
     const recipes_details = await user_utils.getfamilyRecipes(user_id);
-    let recipes_id_array = [];
+    
     res.status(200).send(recipes_details);
   } catch(error){
     next(error); 
@@ -125,7 +125,7 @@ router.get('/familyRecipes', async (req,res,next) => {
 
     const recipes_details = await user_utils.addpersonalRecipes(user_id, recipe_details);
     res.status(200).send(recipes_details);
-    
+
   } catch(error){
     next(error); 
   }

@@ -21,7 +21,7 @@ async function addRecipeToSeenRecipes(user_id, recipe_id){
 }
 
 async function getfamilyRecipes(user_id){
-    const recipes_details = await DButils.execQuery(`select recipe_owner, recipe_name ,dedicated_time, ingredients, instructions, image from family_recipes where user_id='${user_id}'`);
+    const recipes_details = await DButils.execQuery(`select user_id, recipe_owner, recipe_name as title ,dedicated_time, ingredients, instructions, image from family_recipes where user_id='${user_id}'`);
     return recipes_details;
 }
 

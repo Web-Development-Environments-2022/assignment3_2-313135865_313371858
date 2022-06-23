@@ -43,7 +43,7 @@ router.get("/search", async (req, res, next) => {
  router.get("/getLastSearch", async (req, res, next) => {
   try {
 
-    if (req.session && req.session.user_id) {
+    if (req.session && req.session.user_id && req.session.last_search) {
       result = req.session.last_search 
     }
 
