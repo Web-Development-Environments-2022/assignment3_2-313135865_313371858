@@ -1,5 +1,6 @@
 var express = require("express");
 const req = require("express/lib/request");
+const { RequestError } = require("mssql");
 var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
 const user_utils = require("./utils/user_utils");
@@ -37,25 +38,7 @@ router.get("/search", async (req, res, next) => {
   }
 });
 
-/**
- * This path the last searched query
- */
- router.get("/getLastSearch", async (req, res, next) => {
-  try {
 
-    if (req.session && req.session.user_id && req.session.last_search) {
-      result = req.session.last_search 
-    }
-
-    else {
-      result = ""
-    }
-
-    res.send(result);
-  } catch (error) {
-    next(error);
-  }
-});
 
 /**
  * This path returns a 3 random recipies.
