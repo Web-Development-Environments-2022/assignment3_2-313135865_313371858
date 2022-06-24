@@ -47,7 +47,7 @@ async function getRecipePreview(recipe_id) {
 
 async function getRecipesPreview(results) {
     let response = []
-    for (let i = 0; i < Math.min(5,results.length); i++) {
+    for (let i = 0; i < results.length; i++) {
         response.push(await getRecipePreview(results[i].id))
     }
     return response
