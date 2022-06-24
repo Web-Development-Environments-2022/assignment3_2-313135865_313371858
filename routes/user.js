@@ -72,6 +72,21 @@ router.get('/favorites', async (req,res,next) => {
 });
 
 /**
+ * This path returns the Last searched recipes that were saved by the logged-in user
+ */
+ router.get('/getLastSearched', async (req,res,next) => {
+  
+  try{
+    if (req.session.user_id && req.session.last_search){
+      result = req.session.last_search
+      res.status(200).send(result);
+    }
+  } catch(error){
+    next(error); 
+  }
+});
+
+/**
  * This path returns the user's family recipes that were saved by the logged-in user
  */
 router.get('/familyRecipes', async (req,res,next) => {
