@@ -88,6 +88,7 @@ router.get("/recipePreview", async (req, res, next) => {
   try {
     const recipe = await recipes_utils.getRecipeFullDetails(req.query.recipeId);
     if (req.session && req.session.user_id) {
+      console.log(req.query.recipeId + " added to last seen")
       user_utils.addRecipeToSeenRecipes(req.session.user_id, req.query.recipeId)
     }
     res.send(recipe);
