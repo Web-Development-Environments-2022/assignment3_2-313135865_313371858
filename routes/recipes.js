@@ -4,7 +4,7 @@ const { RequestError } = require("mssql");
 var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
 const user_utils = require("./utils/user_utils");
-
+var _ = require("underscore");
 
 router.get("/", (req, res) => {
   });
@@ -23,15 +23,20 @@ router.get("/search", async (req, res, next) => {
       req.session.last_search = req.query.searchQuery
     }
   
-    const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number,req.query.cuisine,req.query.diet,req.query.intolerances);
+    var recipes = await recipes_utils.searchQuery(req.query.searchQuery,number,req.query.cuisine,req.query.diet,req.query.intolerances,req.query.sort);
     
     if (recipes.length == 0){
       res.send("No results!");
+      return
     }
 
-    else {
-      res.send(recipes);
+    if (req.query.sort != ""){
+      var sortedObjs = _.sortBy( recipes, req.query.sort ).reverse();
+      recipes = sortedObjs
     }
+
+    res.send(recipes);
+    
 
   } catch (error) {
     next(error);
@@ -81,6 +86,20 @@ router.get("/recipePreview", async (req, res, next) => {
 });
 
 
+function dynamicSort(property) {
+  var sortOrder = 1;
+  if(property[0] === "-") {
+      sortOrder = -1;
+      property = property.substr(1);
+  }
+  return function (a,b) {
+      /* next line works with strings and numbers, 
+       * and you may want to customize it to your needs
+       */
+      var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+      return result * sortOrder;
+  }
+}
 
 module.exports = router;
 
