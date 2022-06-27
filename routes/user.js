@@ -87,6 +87,21 @@ router.get('/favorites', async (req,res,next) => {
 });
 
 /**
+ * This path returns wether the user have seen the recipe.
+ */
+ router.get('/getHasSeen', async (req,res,next) => {
+  
+  try{
+    if (req.session.user_id){
+      const results = await user_utils.Is_user_seen_recipe(req.user_id,req.query.recipeId);
+      res.status(200).send(results);
+    }
+  } catch(error){
+    next(error); 
+  }
+});
+
+/**
  * This path returns the user's family recipes that were saved by the logged-in user
  */
 router.get('/familyRecipes', async (req,res,next) => {
