@@ -4,7 +4,7 @@ const { RequestError } = require("mssql");
 var router = express.Router();
 const recipes_utils = require("./utils/recipes_utils");
 const user_utils = require("./utils/user_utils");
-
+var _ = require("underscore");
 
 router.get("/", (req, res) => {
   });
@@ -23,15 +23,20 @@ router.get("/search", async (req, res, next) => {
       req.session.last_search = req.query.searchQuery
     }
   
-    const recipes = await recipes_utils.searchQuery(req.query.searchQuery,number,req.query.cuisine,req.query.diet,req.query.intolerances);
+    var recipes = await recipes_utils.searchQuery(req.query.searchQuery,number,req.query.cuisine,req.query.diet,req.query.intolerances,req.query.sort);
     
     if (recipes.length == 0){
       res.send("No results!");
+      return
     }
 
-    else {
-      res.send(recipes);
+    if (req.query.sort != ""){
+      var sortedObjs = _.sortBy( recipes, req.query.sort ).reverse();
+      recipes = sortedObjs
     }
+
+    res.send(recipes);
+    
 
   } catch (error) {
     next(error);
@@ -79,6 +84,7 @@ router.get("/recipePreview", async (req, res, next) => {
     next(error);
   }
 });
+
 
 
 

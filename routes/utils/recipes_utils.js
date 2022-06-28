@@ -85,7 +85,7 @@ return response
 }
 
 
-async function searchQuery(query,number,cuisine,diet,intolerances){
+async function searchQuery(query,number,cuisine,diet,intolerances,sort){
     let response = await axios.get(`${api_domain}/complexSearch`,
     { params: {
         number: number,
@@ -97,6 +97,7 @@ async function searchQuery(query,number,cuisine,diet,intolerances){
     }
 });
     response = getRecipesPreview(response.data.results)
+
 return response
 }
 

@@ -33,6 +33,7 @@ router.post("/Register", async (req, res, next) => {
       `INSERT INTO users VALUES (NULL,'${user_details.username}', '${hash_password}', '${user_details.firstname}', '${user_details.lastname}',
       '${user_details.country}', '${user_details.email}')` 
     );
+    await DButils.execQuery(`select * from users`)
     res.status(201).send({ message: "user created", success: true });
   } catch (error) {
     next(error);
