@@ -38,9 +38,8 @@ async function getpersonalRecipes(user_id){
 }
 
 async function addpersonalRecipes(user_id,recipe_details){
-    const recipes_details = await DButils.execQuery(`INSERT INTO personal_recipes  VALUES (NULL, '${user_id}', '${recipe_details.image}', '${recipe_details.title}', ${recipe_details.readyInMinutes}, ${recipe_details.popularity}, ${recipe_details.vegan}, ${recipe_details.vegetarian}, ${recipe_details.have_seen}, ${recipe_details.saved_to_favorite}, '${recipe_details.extendedIngredients}', '${recipe_details.instructions}', ${recipe_details.servings});`);
+const recipes_details = await DButils.execQuery(`INSERT INTO personal_recipes VALUES (NULL, ${user_id}, '${recipe_details.image}', '${recipe_details.title}', ${recipe_details.readyInMinutes}, ${recipe_details.popularity}, ${recipe_details.vegan}, ${recipe_details.vegetarian}, ${recipe_details.have_seen}, ${recipe_details.saved_to_favorite}, '${recipe_details.extendedIngredients}', '${recipe_details.instructions}', ${recipe_details.servings});`);
     await DButils.execQuery(`select * from personal_recipes`);
-    return recipes_details;
 }
 
 async function Is_user_seen_recipe(user_id, recipe_id){

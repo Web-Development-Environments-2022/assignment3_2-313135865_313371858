@@ -171,8 +171,8 @@ router.get('/familyRecipes', async (req,res,next) => {
       popularity: 0,
       vegan: req.body.vegan,
       vegetarian: req.body.vegetarian,
-      have_seen: 0,
-      saved_to_favorite: 0,
+      have_seen: false,
+      saved_to_favorite: false,
       extendedIngredients: req.body.extendedIngredients,
       instructions: req.body.instructions,
       servings: req.body.servings
