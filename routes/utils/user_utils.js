@@ -12,6 +12,7 @@ async function getFavoriteRecipes(user_id){
 
 async function deleteFavoriteRecipes(user_id,recipe_id){
     const recipes_id = await DButils.execQuery(`delete from favorite_recipes where user_id='${user_id}' AND recipe_id='${recipe_id}' `);
+    await DButils.execQuery(`select * from favorite_recipes`);
     return recipes_id;
 }
 
@@ -22,6 +23,7 @@ async function getLastSeenRecipes(user_id){
 
 async function addRecipeToSeenRecipes(user_id, recipe_id){
     await DButils.execQuery(`insert into user_recipe_seen_date values (${user_id},${recipe_id}, NOW())`);
+    await DButils.execQuery(`select * from user_recipe_seen_date`)
     
 }
 
@@ -37,6 +39,7 @@ async function getpersonalRecipes(user_id){
 
 async function addpersonalRecipes(user_id,recipe_details){
     const recipes_details = await DButils.execQuery(`INSERT INTO personal_recipes  VALUES (NULL, '${user_id}', '${recipe_details.image}', '${recipe_details.title}', ${recipe_details.readyInMinutes}, ${recipe_details.popularity}, ${recipe_details.vegan}, ${recipe_details.vegetarian}, ${recipe_details.have_seen}, ${recipe_details.saved_to_favorite}, '${recipe_details.extendedIngredients}', '${recipe_details.instructions}', ${recipe_details.servings});`);
+    await DButils.execQuery(`select * from personal_recipes`);
     return recipes_details;
 }
 
